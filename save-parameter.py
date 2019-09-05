@@ -1,9 +1,9 @@
 import pickle
 import numpy as np
-from preprocessing import preprocessing
+from preprocessing import preprocessing_text
 
 keywords = ["stok","bay","werbesteuer","umsst","aktivbank","rechnungsausgleich","innoscripta","contabo","strato","global","j2","hetzner","online","norton","naturenergie","upwrkescrow","auftraggeber","auftrag","telekom","sipgate","toplink","1u1","telecom","telekommunikations","komm","telenova","billpay","aral","tankstelle","agip","warngau","moritz","knopp","fahrtkosten","lufthan","auslage","bravofly","airbnb","auslagen","sepaÜberweisung","knappschaftbahnsee","bosch","bkk","beitraege","lohn","gehalt","aok","bmw","betriebskrankenkasse","lohnabrechnung","auszahlungsbetrag","bonus","sepaÜberweisung","dakgesundheit","mobil","oil","beitrag","ikk","classic","krankenkasse","lohnst","reifen","widholzer","bundeskasse","weiden","reifendienste","pneuhage","hdi","kraftfahrtversicherung","autoservice","böttcher","otto","schaefersho","furnishyourspace","ikea","depot","alternate","weberbuero","lizengo","mindfactory","amazon","facility","sasse","management","wunderagent","miete","trockenbau","rent","voip","lebensversicherung","real","estate","onlinemarketing","content5","handbuch","experten","swm","versorgungs","operngrill","fechcon","dienstwohnung","grundbesitz","lohndata","rechtsanwalte","partner","landesjustizkasse","gkk","partners","rechtsberatung","eutop","international"]
-categories = ["steuer", "aktivbank", "it", "telekom", "reisekosten", "personalkosten", "dienstwagen", "invest", "miete", "dienstleister", "miete_it", "steuerberater", "recht", "joos"]
+categories = ["steuer", "aktivbank", "it", "telekom", "reisekosten", "personalkosten", "dienstwagen", "invest", "miete", "dienstleister", "miete_it", "steuerberater", "recht", "joos", "sonstiges"]
 connections = [
   { "category": "steuer", "keywords": ["stok", "bay", "werbesteuer", "umsst"] },
   {
@@ -173,7 +173,8 @@ connections = [
       "rechtsberatung"
     ]
   },
-  { "category": "joos", "keywords": ["eutop", "international"] }
+  { "category": "joos", "keywords": ["eutop", "international"] },
+  { "category": "sonstiges", "keywords": [] }
 ]
 
 adjacency_matrix = np.zeros([len(keywords), len(categories)], np.float32)
@@ -194,12 +195,12 @@ def init_adjecency_matrix():
         else:
             print(keyword)
 
-with open('trained-data/123456789/categories.dictionary', 'wb') as categories_dictionary:
+with open('data/123456789/categories.dictionary', 'wb') as categories_dictionary:
     pickle.dump(categories, categories_dictionary)
 
 init_adjecency_matrix()
-with open('trained-data/123456789/adjecency_matrix.dictionary', 'wb') as adjecency_matrix_dictionary:
+with open('data/123456789/adjecency_matrix.dictionary', 'wb') as adjecency_matrix_dictionary:
     pickle.dump(adjacency_matrix, adjecency_matrix_dictionary)
 
-with open('trained-data/123456789/keywords.dictionary', 'wb') as keywords_dictionary:
-    pickle.dump(preprocessing(keywords), keywords_dictionary)
+with open('data/123456789/keywords.dictionary', 'wb') as keywords_dictionary:
+    pickle.dump(preprocessing_text(keywords), keywords_dictionary)
