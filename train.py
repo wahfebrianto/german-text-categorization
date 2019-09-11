@@ -1,7 +1,10 @@
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import SGDClassifier
 import numpy as np
 import csv
 from preprocessing import preprocessing, get_index_of_category
+from scipy.spatial.distance import correlation
 
 X_train = np.array([])
 Y_train = np.array([])
@@ -36,15 +39,17 @@ def read_test_data():
     return X_test, Y_test
 
 
-def train():
+def train(classifier):
     X_train, Y_train = read_train_data()
     X_test, Y_test = read_test_data()
     print('Start training')
     print(X_train.shape)
-    clf = MultinomialNB().fit(X_train, Y_train.ravel())
+    clf = classifier.fit(X_train, Y_train.ravel())
+    clf = clf.fit(X_train, Y_train.ravel())
     predicted = clf.predict(X_test)
     accuracy = np.mean(predicted == Y_test)
     return accuracy
 
 
-print('Accuracy: ', train())
+# print('Accuracy: ', train(KNeighborsClassifier(n_neighbors=3, p=2, algorithm='brute', metric='cosine')))
+# print('Accuracy: ', train(MultinomialNB()))

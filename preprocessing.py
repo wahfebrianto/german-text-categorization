@@ -30,7 +30,7 @@ def tokenize(text):
 
 
 def remove_stop_words(text):
-    stops = stopwords.words('german') + list(string.punctuation)
+    stops = stopwords.words('german') + stopwords.words('english') + list(string.punctuation)
     return [i for i in text if i not in stops]
 
 
