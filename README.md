@@ -1,2 +1,2 @@
 # german-text-categorization
-This app will categorize german text based on Natural Language classification and KNN with cosine distance.
+This app will categorize german text based on Natural Language classification with Support Vector Machine.
