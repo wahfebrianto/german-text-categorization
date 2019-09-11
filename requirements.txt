@@ -1,4 +1,3 @@
 numpy
-sdasd
-asdasasde
-gfsdgfsdgf
+nltk
+sklearn

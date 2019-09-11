@@ -45,25 +45,24 @@ def read_test_data():
             Y_test.append(get_index_of_category(row[1]))
     return X_test, Y_test
 
-# count_vect = CountVectorizer()
+count_vect = CountVectorizer()
 X_train, Y_train = read_train_data()
 X_test, Y_test = read_test_data()
-# text_clf = Pipeline([('vect', CountVectorizer(stop_words=stopwords.words('german'))), ('tfidf', TfidfTransformer()), ('clf', SGDClassifier())])
-# text_clf = text_clf.fit(X_train, Y_train)
-# predicted = text_clf.predict(X_test)
-# accuracy = np.mean(predicted == Y_test)
-#
-# print('Accuracy: ', accuracy)
+text_clf = Pipeline([('vect', CountVectorizer(stop_words=stopwords.words('german'))), ('tfidf', TfidfTransformer()), ('clf', SGDClassifier())])
+text_clf = text_clf.fit(X_train, Y_train)
+predicted = text_clf.predict(X_test)
+accuracy = np.mean(predicted == Y_test)
+print('Accuracy: ', accuracy)
 
-# with open('data/123456789/model.dictionary', 'wb') as model_dictionary:
-#     pickle.dump(text_clf, model_dictionary)
+with open('data/123456789/model.dictionary', 'wb') as model_dictionary:
+    pickle.dump(text_clf, model_dictionary)
 
-with open('data/123456789/model.dictionary', 'rb') as model_dictionary:
-    text_clf = pickle.load(model_dictionary)
-    predicted = text_clf.predict(X_test)
-    accuracy = np.mean(predicted == Y_test)
+# with open('data/123456789/model.dictionary', 'rb') as model_dictionary:
+#     text_clf = pickle.load(model_dictionary)
+#     predicted = text_clf.predict(X_test)
+#     accuracy = np.mean(predicted == Y_test)
 
-    print('Accuracy: ', accuracy)
+#     print('Accuracy: ', accuracy)
 
 
 ############
